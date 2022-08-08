@@ -2,14 +2,14 @@ class Solution {
 public:
     int visited[100001];
     vector<int> path[100001];
-    int possibleNodes;
-    void dfs(int curNode){
+    int dfs(int curNode){
+        int ret = 1;
         if(visited[curNode]) 
-            return;
+            return 0;
         visited[curNode] = 1;
-        possibleNodes++;
         for(int nextNode : path[curNode])
-            dfs(nextNode);
+            ret += dfs(nextNode);
+        return ret;
     }
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
         
@@ -22,7 +22,6 @@ public:
             path[from].push_back(to);
             path[to].push_back(from);
         }
-        dfs(0);
-        return possibleNodes;
+        return dfs(0);
     }
 };
