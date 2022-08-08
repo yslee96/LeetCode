@@ -1,18 +1,18 @@
 class Solution {
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int maxLen = 0;
-        vector<int> dp(nums.size(), 1);
+        vector<int> seq;
         for(int i=0; i<nums.size(); i++){
-           for(int j=i+1; j<nums.size(); j++){
-               if(nums[i] < nums[j]){
-                   dp[j] = max(dp[i]+1, dp[j]);
-               }
-           }
+            auto iter = lower_bound(seq.begin(), seq.end(), nums[i]);
+            if(iter==seq.end()){
+                //printf("it's okay to keep this seq\n");
+                seq.push_back(nums[i]);
+            }
+            else{
+                //printf("need to make a new seq\n");
+                *iter = nums[i];
+            }
         }
-        for(int num : dp){
-            maxLen = max(maxLen, num);
-        }
-        return maxLen; 
+        return seq.size();
     }
 };
