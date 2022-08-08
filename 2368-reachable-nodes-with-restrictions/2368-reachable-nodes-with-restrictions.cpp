@@ -4,11 +4,11 @@ public:
     vector<int> path[100001];
     int dfs(int curNode){
         int ret = 1;
-        if(visited[curNode]) 
-            return 0;
-        visited[curNode] = 1;
-        for(int nextNode : path[curNode])
+        for(int nextNode : path[curNode]){
+            if(visited[nextNode]) continue;
+            visited[nextNode] = 1;
             ret += dfs(nextNode);
+        }
         return ret;
     }
     int reachableNodes(int n, vector<vector<int>>& edges, vector<int>& restricted) {
@@ -22,6 +22,7 @@ public:
             path[from].push_back(to);
             path[to].push_back(from);
         }
+        visited[0] = 1;
         return dfs(0);
     }
 };
