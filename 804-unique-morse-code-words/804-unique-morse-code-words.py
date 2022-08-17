@@ -8,6 +8,5 @@ class Solution:
             for ch in word:
                 res += morses[ord(ch)-ord("a")]
             results.add(res)
-        print(results)
         return len(results)
             
