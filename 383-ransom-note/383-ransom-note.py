@@ -5,7 +5,7 @@ class Solution:
         flag = True
         for letter in note:
             if mgz[letter] < note[letter]:
-                flag = False
-        return flag
+                return False
+        return True
                 
         
