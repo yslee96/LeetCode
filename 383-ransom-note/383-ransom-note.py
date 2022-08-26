@@ -1,18 +1,11 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
-        note = collections.defaultdict(int)
-        mgz = collections.defaultdict(int)
-        for ch in ransomNote:
-            note[ch] +=1
-        for ch in magazine:
-            mgz[ch] +=1
+        note = collections.Counter(list(ransomNote))
+        mgz = collections.Counter(list(magazine))
         flag = True
-        for key, value in note.items():
-            if mgz[key] and mgz[key] >= value:
-                continue
-            else:
+        for letter in note:
+            if mgz[letter] < note[letter]:
                 flag = False
-        print(note.items())
         return flag
                 
         
