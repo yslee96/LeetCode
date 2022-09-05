@@ -10,12 +10,11 @@ class Solution:
     def levelOrder(self, root: 'Node') -> List[List[int]]:
         def dfs(root, level):
             if root == None: return
-            if level == len(ans):  
-                ans.append([])
-            ans[level].append(root.val)
+            if level == len(levels):
+                levels.append([])
+            levels[level].append(root.val)
             for child in root.children:
-                dfs(child, level + 1)
-              
-        ans = []
+                dfs(child, level+1)
+        levels = []
         dfs(root, 0)
-        return ans
+        return levels
