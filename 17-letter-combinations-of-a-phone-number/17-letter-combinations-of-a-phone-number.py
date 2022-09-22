@@ -14,4 +14,4 @@ class Solution:
                 
         
         make_combi(digits, 1, "")
-        return results if len(results) else []
+        return results
