@@ -4,10 +4,8 @@ class Solution:
             if len(path) == len(digits):
                 result.append(path)
                 return
-            
-            for i in range(index, len(digits)):
-                for j in letters[digits[i]]:
-                    dfs(i+1, path+j)
+            for ch in letters[digits[index]]:
+                dfs(index+1, path+ch)
                 
         if not digits:
             return []
