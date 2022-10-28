@@ -1,10 +1,9 @@
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
-        opening = ['(', '{', '[']
         pair = {')' : '(', '}':'{', ']':'['}
         for ch in s:
-            if ch in opening:
+            if ch in pair.values():
                 stack.append(ch)
             else:
                 if stack and stack[-1] == pair[ch]:
