@@ -27,7 +27,6 @@ class Solution:
                     cur = cur.children[c]
                     if cur.is_word:
                         dp[j] = True
-        print(dp)
         return dp[-1]
 
         
