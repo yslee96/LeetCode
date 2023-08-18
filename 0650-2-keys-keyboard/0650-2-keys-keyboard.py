@@ -1,15 +1,24 @@
 class Solution:
     def minSteps(self, n: int) -> int:
-        dp = [[float('inf') for _ in range(n+1)] for _ in range(n+1)]
-        dp[1][0] = 0
-        dp[1][1] = 1
-        for i in range(1, n+1):
-            for j in range(n):
-                if i+j <= n:
-                    dp[i+j][j] = min(dp[i+j][j], dp[i][j] + 1)
-                if i*2 <=n:
-                    dp[2*i][i] = min(dp[2*i][i], dp[i][j] + 2)
+        memo = {}
+        def recursion(displayed, copied):
+            print(displayed, copied)
+            if (displayed, copied) in memo:
+                return memo[(displayed, copied)]
 
-        return min(dp[n])
+            if displayed == n:
+                return 0
+            
+            if displayed > n:
+                return float('inf')
+
+            copy_and_paste = recursion(displayed+displayed, displayed) + 2
+            only_paste = float('inf')
+            if copied:
+                only_paste = recursion(displayed + copied, copied) + 1
+
+            memo[(displayed, copied)] = min(copy_and_paste, only_paste)
+            return memo[(displayed, copied)]
+        return recursion(1,0)
          
             
