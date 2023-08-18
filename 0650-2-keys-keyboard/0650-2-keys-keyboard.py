@@ -2,7 +2,7 @@ class Solution:
     def minSteps(self, n: int) -> int:
         memo = {}
         def recursion(displayed, copied):
-            print(displayed, copied)
+            #print(displayed, copied)
             if (displayed, copied) in memo:
                 return memo[(displayed, copied)]
 
