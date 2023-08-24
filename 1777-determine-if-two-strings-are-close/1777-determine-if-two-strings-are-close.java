@@ -42,10 +42,6 @@ class Solution {
                 f2.put(freq, 1);
             }
         }
-        System.out.println(w1.keySet().toString());
-        System.out.println(w2.keySet().toString());
-        System.out.println(f1.values().toString());
-        System.out.println(f2.values().toString());
         return w1.keySet().equals(w2.keySet()) && f1.equals(f2);
     }
 }
