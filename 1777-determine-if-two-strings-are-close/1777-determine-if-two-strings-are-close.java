@@ -1,47 +1,35 @@
 class Solution {
     public boolean closeStrings(String word1, String word2) {
+        
+        int len1 = word1.length();
+        int len2 = word2.length();
+
+        if(len1 != len2) return false;
+
         Map<Character, Integer> w1 = new HashMap<>();
         Map<Character, Integer> w2 = new HashMap<>();
-        Map<Integer, Integer> f1 = new HashMap<>();
-        Map<Integer, Integer> f2 = new HashMap<>();
+        ArrayList<Integer> a = new ArrayList<>();
+        ArrayList<Integer> b = new ArrayList<>();
 
-        if(word1.length() != word2.length()){
-            return false;
+        for(int i=0; i<len1; i++){
+            w1.put(word1.charAt(i), 1+w1.getOrDefault(word1.charAt(i), 0));
         }
 
-        for(char ch : word1.toCharArray()){
-            if(w1.containsKey(ch)){
-                w1.put(ch, w1.get(ch) + 1);
-            }else{
-                w1.put(ch, 1);
+        for(int i=0; i<len2; i++){
+            if(w1.containsKey(word2.charAt(i))){
+                w2.put(word2.charAt(i), 1+w2.getOrDefault(word2.charAt(i), 0));
+            }
+            else{
+                return false;
             }
         }
+        
+        a = new ArrayList(w1.values());
+        b = new ArrayList(w2.values());
 
-        for(Map.Entry<Character, Integer> e: w1.entrySet()){
-            int freq = e.getValue();
-            if(f1.containsKey(freq)){
-                f1.put(freq, f1.get(freq) + 1);
-            }else{
-                f1.put(freq, 1);
-            }
-        }
+        Collections.sort(a);
+        Collections.sort(b);
 
-        for(char ch : word2.toCharArray()){
-            if(w2.containsKey(ch)){
-                w2.put(ch, w2.get(ch) + 1);
-            }else{
-                w2.put(ch, 1);
-            }
-        }
-
-        for(Map.Entry<Character, Integer> e: w2.entrySet()){
-            int freq = e.getValue();
-            if(f2.containsKey(freq)){
-                f2.put(freq, f2.get(freq) + 1);
-            }else{
-                f2.put(freq, 1);
-            }
-        }
-        return w1.keySet().equals(w2.keySet()) && f1.equals(f2);
+        return a.equals(b);
     }
 }
