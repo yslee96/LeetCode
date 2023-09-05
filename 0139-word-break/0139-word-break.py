@@ -11,10 +11,9 @@ class Solution:
             string = ''
             for i in range(idx, len(s)):
                 string += s[i]
-                if string in wordDict:
-                    if check_if_break_possible(i+1):
-                        dp[idx] = 1
-                        return dp[idx]
+                if string in wordDict and check_if_break_possible(i+1):
+                    dp[idx] = 1
+                    return dp[idx]
             dp[idx]=0
             return dp[idx]
 
