@@ -1,32 +1,26 @@
-class TrieNode:
-    def __init__(self):
-        self.is_word = False
-        self.children = dict()
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
-        root = TrieNode()
-        for word in wordDict:
-            cur = root
-            for c in word:
-                if c not in cur.children:
-                    cur.children[c] = TrieNode()
-                cur = cur.children[c]
+        dp = [-1 for _ in range(len(s))]
+        def check_if_break_possible(idx):
+            #print("call: ", idx)
+            if idx >= len(s):
+                return 1
+            if dp[idx]!=-1:
+                return dp[idx] == 1
             
-            cur.is_word = True
+            string = ''
+            result = False
+            for i in range(idx, len(s)):
+                string += s[i]
+                if string in wordDict:
+                    if check_if_break_possible(i+1):
+                        dp[idx] = 1
+                        return dp[idx]
+            dp[idx]=0
+            return dp[idx]
 
-        dp = [False for _ in range(len(s))]
-        for i in range(len(s)):
-            if i == 0 or dp[i-1]:
-                cur = root
-                for j in range(i, len(s)):
-                    c = s[j]
-                    if c not in cur.children:
-                        break
-                    
-                    cur = cur.children[c]
-                    if cur.is_word:
-                        dp[j] = True
-        return dp[-1]
-
+        ret = check_if_break_possible(0) == 1
+        #print(dp)
+        return ret
         
