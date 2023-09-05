@@ -19,7 +19,6 @@ class Solution:
                     if stones[j] == next_pos:
                         next_idx = j
                 if next_idx!=-1:
-                    print(stones[next_idx], k+i)
                     if frog_jump(next_idx, k+i):
                         dp[(idx,k)] = 1
                         return dp[(idx,k)]
