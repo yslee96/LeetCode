@@ -10,7 +10,7 @@ answer = -1
 
 q = deque()
 q.append([0, horse_move, 0, 0])
-visited[(0, horse_move, 0, 0)] = 1 
+visited[(horse_move, 0, 0)] = 1 
 
 while q:
     cur_cnt, horse_cnt, cur_row, cur_col = q.popleft()
