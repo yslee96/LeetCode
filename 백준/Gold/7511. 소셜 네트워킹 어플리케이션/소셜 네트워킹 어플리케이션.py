@@ -1,7 +1,6 @@
 import sys
 
 input = sys.stdin.readline
-reps = []
 
 
 def find_rep(num):
@@ -20,14 +19,15 @@ def is_same_set(set1, set2):
 
 
 test_cases = int(input())
+reps = []
+
 for test_case in range(1, test_cases + 1):
     num_users = int(input())
     reps = [i for i in range(num_users)]
     num_relations = int(input())
     for _ in range(num_relations):
         user_a, user_b = map(int, input().split())
-        if not is_same_set(user_a, user_b):
-            union_set(user_a, user_b)
+        union_set(user_a, user_b)
 
     print(f"Scenario {test_case}:")
 
