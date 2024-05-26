@@ -4,7 +4,9 @@ def solution(land):
     visited = [[False for _ in range(max_col)] for _ in range(max_row)]
     oil_cnts = {col : 0 for col in range(max_col)}
 
-    def bfs(s_row, s_col):
+    def count_oils(s_row, s_col):
+        
+        # (1) bfs
         oil_cnt = 0
         left_most, right_most = max_col, s_col
         q = deque([(s_row, s_col)])
@@ -22,13 +24,14 @@ def solution(land):
                 if land[n_row][n_col] and not visited[n_row][n_col]:
                     q.append((n_row, n_col))
                     visited[n_row][n_col] = True
-                    
+        
+        #(2) update oil cnt per column           
         for col in range(left_most, right_most +1):
             oil_cnts[col] += oil_cnt
     
     for row in range(max_row):
         for col in range(max_col):
             if land[row][col] and not visited[row][col]:
-                bfs(row, col)
+                count_oils(row, col)
 
     return max(oil_cnts.values())
